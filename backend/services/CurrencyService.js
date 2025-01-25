@@ -40,7 +40,7 @@ const axios = require("axios");
 const { ValidationError, BadRequestError } = require("../utils/errors");
 
 const EXCHANGE_RATE_API_URL = "https://v6.exchangerate-api.com/v6";
-const API_KEY = "5246958700ff19fb460244a1";
+const API_KEY = "SET_YOUR_KEY_HERE";
 
 // Fetches the exchange rate for the given currency pair
 const getExchangeRate = async (from, to) => {
