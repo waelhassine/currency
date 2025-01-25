@@ -1,7 +1,7 @@
 const currencyService = require("../services/CurrencyService");
 
 exports.convertCurrency = async (req, res) => {
-  const { from, to, amount } = req.query;
+  const { from, to, amount } = req.body;
 
   try {
     const result = await currencyService.convertCurrencyHandler(

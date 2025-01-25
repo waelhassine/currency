@@ -40,7 +40,7 @@ const axios = require("axios");
 const { ValidationError, BadRequestError } = require("../utils/errors");
 
 const EXCHANGE_RATE_API_URL = "https://v6.exchangerate-api.com/v6";
-const API_KEY = process.env.EXCHANGE_RATE_API_KEY;
+const API_KEY = "5246958700ff19fb460244a1";
 
 // Fetches the exchange rate for the given currency pair
 const getExchangeRate = async (from, to) => {
@@ -49,7 +49,6 @@ const getExchangeRate = async (from, to) => {
       `${EXCHANGE_RATE_API_URL}/${API_KEY}/latest/${from.toUpperCase()}`,
     );
     const rates = response.data.conversion_rates;
-    console.log("rates", rates);
 
     if (!rates[to.toUpperCase()]) {
       throw new ValidationError(`Currency '${to}' is not supported.`);
@@ -58,7 +57,7 @@ const getExchangeRate = async (from, to) => {
     return rates[to.toUpperCase()];
   } catch (error) {
     if (error instanceof ValidationError) {
-      throw error; // Re-throw ValidationError
+      throw error;
     }
     throw new Error("Failed to fetch exchange rates. Please try again later.");
   }
@@ -89,7 +88,6 @@ const convertCurrencyHandler = async (from, to, amount) => {
 
   // Fetch exchange rate
   const rate = await getExchangeRate(from, to);
-  console.log("rate --------------->", rate);
 
   // Perform currency conversion
   const convertedAmount = convertCurrency(rate, amount);
